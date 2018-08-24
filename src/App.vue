@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <h2>Rannan turvallisuus...</h2>
-    <checkbox data="stateA" v-on:add-prestige="updatePrestige" title="Kioski" prestige="1" />
-    <checkbox data="stateA" v-on:add-prestige="updatePrestige" title="Rannan sijainti pyöräilymatkan päässä tai asutuskeskuksen välittömässä läheisyydessä" prestige="2" />
+    <checkbox  v-on:add-prestige="updatePrestige" title="Kioski" prestige="1" />
+    <checkbox v-on:add-prestige="updatePrestige" title="Rannan sijainti pyöräilymatkan päässä tai asutuskeskuksen välittömässä läheisyydessä" prestige="2" />
     <p>Välitulos A: {{ stateA }}</p>
     <hr />
 
     <h2>Asiakasmäärät</h2>
-    <radio data="stateB" v-on:add-prestige="updatePrestige" name="asikasmaarat" altTitle="Asiakasmäärä alle 30" title="< 30" prestige="0" />
-    <radio data="stateB" v-on:add-prestige="updatePrestige"  name="asikasmaarat" title="30-60" prestige="5" />
+    <radio v-on:add-prestige="updatePrestige" name="asikasmaarat" altTitle="Asiakasmäärä alle 30" title="< 30" prestige="0" />
+    <radio v-on:add-prestige="updatePrestige"  name="asikasmaarat" title="30-60" prestige="5" />
 
     <p>Välitulos B: {{ stateB }}</p>
     <hr />
@@ -38,8 +38,8 @@ export default {
       }
     },
     methods: {
-        updatePrestige(value,checked,data) {
-            if (data === 'stateA') {
+        updatePrestige(value,checked) {
+            if (checked !== null) {
               if (checked) {
                   this.stateA += value;
               } else {

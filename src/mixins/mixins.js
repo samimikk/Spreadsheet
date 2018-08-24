@@ -1,5 +1,5 @@
 export default {
-        props: ['title','prestige','data','altTitle','name'],
+        props: ['title','prestige','altTitle','name'],
         data() {
             return {
                 checked: false,
@@ -39,7 +39,7 @@ export default {
             },
             addPrestige() {
                 this.value = Number(this.prestige);
-                this.$emit('add-prestige',this.value, this.checked, this.data)
+                this.$emit('add-prestige',this.value, this.checked)
             }
         }
 }
