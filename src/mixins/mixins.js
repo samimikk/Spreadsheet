@@ -1,10 +1,14 @@
+
+
 export default {
         props: ['title','prestige','altTitle','name'],
         data() {
             return {
                 checked: false,
                 id: "",
-                value: 0
+                prestigeAmoumt: 0,
+                isActive: true,
+                value: false
             }
         },
         mounted() {
@@ -14,6 +18,7 @@ export default {
                 this.id = this.getId(this.altTitle);
             }
         },
+        computed: {},
         methods: {
             getId(title) {
                 let str = "";
@@ -38,8 +43,22 @@ export default {
                 return s;
             },
             addPrestige() {
-                this.value = Number(this.prestige);
-                this.$emit('add-prestige',this.value, this.checked)
+                this.prestigeAmoumt = Number(this.prestige);
+                this.$emit('add-prestige',this.prestigeAmoumt, this.checked)
+
+                var elem = document.getElementById(this.id)
+                if (elem.classList.contains('radio')) {
+                    const container = document.getElementById('app');
+                    const wrappers = container.querySelectorAll('.selection--radio');
+                    for (let i=0;i<wrappers.length;i++) {
+                        wrappers[i].classList.remove('active');
+                    }
+                    elem.parentElement.parentElement.classList.add('active');
+                }
+
+
+
+
             }
         }
 }

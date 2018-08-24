@@ -1,9 +1,9 @@
 <template>
-    <div class="row-fluid">
+    <div :class="{ selection: isActive, 'active': checked }">
         <label v-bind:for="id">
-            <input v-bind:id="id" type="checkbox" v-model="checked" v-on:change="addPrestige"> {{ title }}
+            <input v-bind:id="id" type="checkbox" v-model="checked" @change="addPrestige"> {{ title }}
         </label>
-        <div class="selection-value">
+        <div class="selection__value">
             {{ prestige }}
         </div>
     </div>

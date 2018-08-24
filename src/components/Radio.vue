@@ -1,9 +1,9 @@
 <template>
-    <div class="row-fluid">
+    <div class="selection selection--radio">
         <label v-bind:for="id">
-            <input v-bind:id="id" type="radio" v-bind:name="name" v-model="checked" v-on:change="addPrestige"> {{ title }}
+            <input :id="id" type="radio"  class="radio" :name="name"  v-model="value"   @click="addPrestige"> {{ title }}
         </label>
-        <div class="selection-value">
+        <div class="selection__value">
             {{ prestige }}
         </div>
     </div>
