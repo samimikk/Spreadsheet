@@ -1,18 +1,56 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>Rannan turvallisuus...</h2>
+    <checkbox data="stateA" v-on:add-prestige="updatePrestige" title="Kioski" prestige="1" />
+    <checkbox data="stateA" v-on:add-prestige="updatePrestige" title="Rannan sijainti pyöräilymatkan päässä tai asutuskeskuksen välittömässä läheisyydessä" prestige="2" />
+    <p>Välitulos A: {{ stateA }}</p>
+    <hr />
+
+    <h2>Asiakasmäärät</h2>
+    <radio data="stateB" v-on:add-prestige="updatePrestige" name="asikasmaarat" altTitle="Asiakasmäärä alle 30" title="< 30" prestige="0" />
+    <radio data="stateB" v-on:add-prestige="updatePrestige"  name="asikasmaarat" title="30-60" prestige="5" />
+
+    <p>Välitulos B: {{ stateB }}</p>
+    <hr />
+    <p>Valvontaindeksi: {{ totalCount }}</p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Checkbox from './components/Checkbox.vue'
+import Radio from './components/Radio.vue'
 
 export default {
   name: 'app',
+    data() {
+      return {
+         stateA: 0,
+          stateB: 0
+      }
+    },
   components: {
-    HelloWorld
-  }
+      Checkbox,
+      Radio
+  },
+    computed: {
+      totalCount() {
+          return this.stateA + this.stateB;
+      }
+    },
+    methods: {
+        updatePrestige(value,checked,data) {
+            if (data === 'stateA') {
+              if (checked) {
+                  this.stateA += value;
+              } else {
+                  this.stateA -= value;
+                  if (this.stateA < 0) this.stateB = 0;
+              }
+          } else {
+              this.stateB = value;
+          }
+        }
+    }
 }
 </script>
 
@@ -24,5 +62,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#app {
+  .row-fluid {
+    label,
+    .selection-value { display: inline; }
+
+  }
 }
 </style>
