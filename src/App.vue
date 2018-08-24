@@ -12,7 +12,9 @@
 
     <p>Välitulos B: {{ stateB }}</p>
     <hr />
-    <p>Valvontaindeksi: {{ totalCount }}</p>
+    <div :class="setClassName(totalCount)">
+      <p>Valvontaindeksi: {{ totalCount }}</p>
+    </div>
   </div>
 </template>
 
@@ -25,7 +27,8 @@ export default {
     data() {
       return {
          stateA: 0,
-          stateB: 0
+          stateB: 0,
+          classes: ['green','yellow','blue','red']
       }
     },
   components: {
@@ -38,6 +41,27 @@ export default {
       }
     },
     methods: {
+      setClassName(value) {
+          let className;
+
+          if ( value < 10 ) {
+              className = this.classes[0];
+          }
+
+          if ( value > 10 &&  value < 21) {
+              className = this.classes[1];
+          }
+
+          if ( value > 20 &&  value < 36) {
+              className = this.classes[2];
+          }
+
+          if ( value > 35 ) {
+              className = this.classes[2];
+          }
+
+          return className;
+      },
         updatePrestige(value,checked) {
             if (checked !== null) {
               if (checked) {
